@@ -1,0 +1,225 @@
+Name: Sahil Vengurlekar
+Batch: R
+Roll no: 56
+PRN no: F21113058
+Assignment No: A4
+Assignment title: Fine Calculation
+
+
+
+
+Statement 1
+
+create table borrower_99 (roll_no int ,name varchar(255), date_of_issue date ,name_of_book varchar(255) ,status varchar(255))
+
+Table created.
+
+Statement 2
+
+create table fine_00 (roll_no int , date_1 date,amt int)
+
+Table created.
+
+Statement 3
+
+insert into borrower_99 values (68 , 'shri' , '10-aug-2023' , 'vee' , 'I')
+
+1 row(s) inserted.
+
+Statement 4
+
+insert into borrower_99 values (14 , 'Rob' , '15-sep-2023' , 'blm' , 'I')
+
+1 row(s) inserted.
+
+Statement 5
+
+insert into borrower_99 values (55 , 'yas' , '20-sep-2022' , 'hei' , 'I')
+
+1 row(s) inserted.
+
+Statement 6
+
+insert into borrower_99 values (66 , 'sur' , '1-jan-2023' , 'hwht' , 'I')
+
+1 row(s) inserted.
+
+Statement 7
+
+DECLARE  
+roll_no9 number; 
+issue_date9 date; 
+current_date date:='14-sep-2023'; 
+date_late number; 
+fine_amt number; 
+fine_amt1 number; 
+fine_amt2 number; 
+x int :=0; 
+ 
+BEGIN 
+roll_no9 := &rollno; 
+ select date_of_issue into issue_date9 
+from borrower_99 
+where roll_no= roll_no9; 
+ 
+date_late:=current_date - issue_date9; 
+dbms_output.put_line('days= ' || date_late); 
+ 
+for date_late in 16 .. 30 LOOP 
+    x:=x+1; 
+END LOOP; 
+fine_amt1:=(x * 5); 
+ 
+if date_late >15 and date_late < 30 then 
+    fine_amt:=fine_amt1; 
+end if;  
+ 
+if date_late > 30 then  
+fine_amt2:=(date_late -30)* 50; 
+fine_amt:=fine_amt1+fine_amt2; 
+end if; 
+ 
+if date_late <15 then  
+    fine_amt:=0; 
+ 
+end if; 
+ 
+update borrower_99 
+set status='R' 
+where roll_no=roll_no9; 
+ 
+if fine_amt>0 then  
+insert into fine_00 (roll_no,date_1,amt) values (roll_no9, current_date,fine_amt); 
+end if; 
+ 
+dbms_output.put_line('fine amount : rs. ' || fine_amt); 
+ 
+ 
+END; 
+
+ORA-06550: line 12, column 13:
+PLS-00103: Encountered the symbol "&" when expecting one of the following:
+
+   ( - + case mod new not null <an identifier>
+   <a double-quoted delimited-identifier> <a bind variable>
+   continue avg count current exists max min prior sql stddev
+   sum variance execute forall merge time timestamp interval
+   date <a string literal with character set specification>
+   <a number> <a single-quoted SQL string> pipe
+   <an alternatively-quoted string literal with character set speci 
+
+
+More Details: https://docs.oracle.com/error-help/db/ora-06550
+Statement 8
+
+DECLARE  
+roll_no9 number; 
+issue_date9 date; 
+current_date date:='29-sep-2023'; 
+date_late number; 
+fine_amt number; 
+fine_amt1 number; 
+fine_amt2 number; 
+x int :=0; 
+ 
+BEGIN 
+roll_no9 := 14; 
+ select date_of_issue into issue_date9 
+from borrower_99 
+where roll_no= roll_no9; 
+ 
+date_late:=current_date - issue_date9; 
+dbms_output.put_line('days= ' || date_late); 
+ 
+for date_late in 16 .. 30 LOOP 
+    x:=x+1; 
+END LOOP; 
+fine_amt1:=(x * 5); 
+ 
+if date_late >15 and date_late < 30 then 
+    fine_amt:=fine_amt1; 
+end if;  
+ 
+if date_late > 30 then  
+fine_amt2:=(date_late -30)* 50; 
+fine_amt:=fine_amt1+fine_amt2; 
+end if; 
+ 
+if date_late <15 then  
+    fine_amt:=0; 
+ 
+end if; 
+ 
+update borrower_99 
+set status='R' 
+where roll_no=roll_no9; 
+ 
+if fine_amt>0 then  
+insert into fine_00 (roll_no,date_1,amt) values (roll_no9, current_date,fine_amt); 
+end if; 
+ 
+dbms_output.put_line('fine amount : rs. ' || fine_amt); 
+ 
+ 
+END; 
+
+Statement processed.
+days= 14
+fine amount : rs. 0
+
+Statement 9
+
+DECLARE  
+roll_no9 number; 
+issue_date9 date; 
+current_date date:='29-sep-2023'; 
+date_late number; 
+fine_amt number; 
+fine_amt1 number; 
+fine_amt2 number; 
+x int :=0; 
+ 
+BEGIN 
+roll_no9 := 66; 
+ select date_of_issue into issue_date9 
+from borrower_99 
+where roll_no= roll_no9; 
+ 
+date_late:=current_date - issue_date9; 
+dbms_output.put_line('days= ' || date_late); 
+ 
+for date_late in 16 .. 30 LOOP 
+    x:=x+1; 
+END LOOP; 
+fine_amt1:=(x * 5); 
+ 
+if date_late >15 and date_late < 30 then 
+    fine_amt:=fine_amt1; 
+end if;  
+ 
+if date_late > 30 then  
+fine_amt2:=(date_late -30)* 50; 
+fine_amt:=fine_amt1+fine_amt2; 
+end if; 
+ 
+if date_late <15 then  
+    fine_amt:=0; 
+ 
+end if; 
+ 
+update borrower_99 
+set status='R' 
+where roll_no=roll_no9; 
+ 
+if fine_amt>0 then  
+insert into fine_00 (roll_no,date_1,amt) values (roll_no9, current_date,fine_amt); 
+end if; 
+ 
+dbms_output.put_line('fine amount : rs. ' || fine_amt); 
+ 
+ 
+END; 
+
+Statement processed.
+days= 271
+fine amount : rs. 12125
