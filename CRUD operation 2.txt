@@ -1,0 +1,317 @@
+CRUD operation 2
+
+
+
+
+test> use CRUD
+switched to db CRUD
+CRUD> db.createCollection("Empdb")
+{ ok: 1 }
+CRUD> db.Empdb.insert({Empid:101,Name:{Fname:"Tejas",Lname:"Dharmale"},company:"ABC",salary:70000,Desgination:"Developer",Age:20,Expertise:["web","Aiml"], DOB:"9/11/02", Email:"tejas@gmail.com",Contact:9067722873,Addr:{Paddr:{City:"Pune",pin:411102},Laddr:"Hadspar"}})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6559775d192511722f158ae1") }
+}
+CRUD> db.Empdb.insert({Empid:102,Name:{Fname:"Sahil",Lname:"Vengi"},company:"ABD",salary:80000,Desgination:"Tester",Age:19,Expertise:["ML","AIML"], DOB:"6/6/03", Email:"sahil@gmail.com",Contact:9067722345,Addr:{Paddr:{City:"Satation",pin:411103},Laddr:"Katraj"}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("6559783c192511722f158ae2") }
+}
+CRUD> db.Empdb.insert({Empid:103,Name:{Fname:"Suraj",Lname:"Gawade"},company:"TCS",salary:90000,Desgination:"Developer",Age:20,Expertise:["anorid","web"], DOB:"26/11/02", Email:"suraj@gmail.com",Contact:9067722349,Addr:{Paddr:{City:"Pune",pin:411104},Laddr:"KP"}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("655978c6192511722f158ae3") }
+}
+CRUD> db.Empdb.insert({Empid:104,Name:{Fname:"Shrikar",Lname:"Kolte"},company:"TCS",salary:100000,Desgination:"Tester",Age:20,Expertise:["ML","Cloud"], DOB:"18/08/02", Email:"Shrikar@gmail.com",Contact:9067722348,Addr:{Paddr:{City:"Pune",pin:411104},Laddr:"UK"}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("65597ad4192511722f158ae4") }
+}
+CRUD> db.Empdb.insert({Empid:105,Name:{Fname:"Yash",Lname:"Shivtare"},company:"TCS",salary:100000,Desgination:"Tester",Age:19,Expertise:["anroid","web"], DOB:"20/07/03", Email:"Yash@gmail.com",Contact:9067722320,Addr:{Paddr:{City:"Pune",pin:411104},Laddr:"Deccan"}})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("65597b45192511722f158ae5") }
+}
+CRUD> Empdb.find().pretty()
+ReferenceError: Empdb is not defined
+CRUD> db.Empdb.find().pretty()
+[
+  {
+    _id: ObjectId("6559775d192511722f158ae1"),
+    Empid: 101,
+    Name: { Fname: 'Tejas', Lname: 'Dharmale' },
+    company: 'ABC',
+    salary: 70000,
+    Desgination: 'Developer',
+    Age: 20,
+    Expertise: [ 'web', 'Aiml' ],
+    DOB: '9/11/02',
+    Email: 'tejas@gmail.com',
+    Contact: 9067722873,
+    Addr: { Paddr: { City: 'Pune', pin: 411102 }, Laddr: 'Hadspar' }
+  },
+  {
+    _id: ObjectId("6559783c192511722f158ae2"),
+    Empid: 102,
+    Name: { Fname: 'Sahil', Lname: 'Vengi' },
+    company: 'ABD',
+    salary: 80000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'ML', 'AIML' ],
+    DOB: '6/6/03',
+    Email: 'sahil@gmail.com',
+    Contact: 9067722345,
+    Addr: { Paddr: { City: 'Satation', pin: 411103 }, Laddr: 'Katraj' }
+  },
+  {
+    _id: ObjectId("655978c6192511722f158ae3"),
+    Empid: 103,
+    Name: { Fname: 'Suraj', Lname: 'Gawade' },
+    company: 'TCS',
+    salary: 90000,
+    Desgination: 'Developer',
+    Age: 20,
+    Expertise: [ 'anorid', 'web' ],
+    DOB: '26/11/02',
+    Email: 'suraj@gmail.com',
+    Contact: 9067722349,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'KP' }
+  },
+  {
+    _id: ObjectId("65597ad4192511722f158ae4"),
+    Empid: 104,
+    Name: { Fname: 'Shrikar', Lname: 'Kolte' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 20,
+    Expertise: [ 'ML', 'Cloud' ],
+    DOB: '18/08/02',
+    Email: 'Shrikar@gmail.com',
+    Contact: 9067722348,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'UK' }
+  },
+  {
+    _id: ObjectId("65597b45192511722f158ae5"),
+    Empid: 105,
+    Name: { Fname: 'Yash', Lname: 'Shivtare' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'anroid', 'web' ],
+    DOB: '20/07/03',
+    Email: 'Yash@gmail.com',
+    Contact: 9067722320,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'Deccan' }
+  }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q1]Selects all documents in the collection where the field age 
+ has a value less than 30 or the value of the salary field is 
+ greater than 40000.
+
+
+
+CRUD> db.Empdb.find({"Age":{$lt:30},"salary":{$gt:40000}})
+[
+  {
+    _id: ObjectId("6559775d192511722f158ae1"),
+    Empid: 101,
+    Name: { Fname: 'Tejas', Lname: 'Dharmale' },
+    company: 'ABC',
+    salary: 70000,
+    Desgination: 'Developer',
+    Age: 20,
+    Expertise: [ 'web', 'Aiml' ],
+    DOB: '9/11/02',
+    Email: 'tejas@gmail.com',
+    Contact: 9067722873,
+    Addr: { Paddr: { City: 'Pune', pin: 411102 }, Laddr: 'Hadspar' }
+  },
+  {
+    _id: ObjectId("6559783c192511722f158ae2"),
+    Empid: 102,
+    Name: { Fname: 'Sahil', Lname: 'Vengi' },
+    company: 'ABD',
+    salary: 90000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'ML', 'AIML' ],
+    DOB: '6/6/03',
+    Email: 'sahil@gmail.com',
+    Contact: 9067722345,
+    Addr: { Paddr: { City: 'Satation', pin: 411103 }, Laddr: 'Katraj' }
+  },
+  {
+    _id: ObjectId("655978c6192511722f158ae3"),
+    Empid: 103,
+    Name: { Fname: 'Suraj', Lname: 'Gawade' },
+    company: 'TCS',
+    salary: 90000,
+    Desgination: 'Developer',
+    Age: 20,
+    Expertise: [ 'anorid', 'web' ],
+    DOB: '26/11/02',
+    Email: 'suraj@gmail.com',
+    Contact: 9067722349,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'KP' }
+  },
+  {
+    _id: ObjectId("65597ad4192511722f158ae4"),
+    Empid: 104,
+    Name: { Fname: 'Shrikar', Lname: 'Kolte' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 20,
+    Expertise: [ 'ML', 'Cloud' ],
+    DOB: '18/08/02',
+    Email: 'Shrikar@gmail.com',
+    Contact: 9067722348,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'UK' }
+  },
+  {
+    _id: ObjectId("65597b45192511722f158ae5"),
+    Empid: 105,
+    Name: { Fname: 'Yash', Lname: 'Shivtare' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'anroid', 'web' ],
+    DOB: '20/07/03',
+    Email: 'Yash@gmail.com',
+    Contact: 9067722320,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'Deccan' }
+  },
+  {
+    _id: ObjectId("65597eca192511722f158ae6"),
+    Empid: 105,
+    Name: { Fname: 'xyz', Lname: 'yz' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 25,
+    Expertise: [ 'anroid', 'web' ],
+    DOB: '29/12/98',
+    Email: 'xyz@gmail.com',
+    Contact: 9067722323,
+    Addr: { Paddr: { City: 'Pune', pin: 411107 }, Laddr: 'vm' }
+  }
+]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Q2]Find documents where Designation is not equal to "Developer"
+
+
+CRUD> db.Empdb.find({"Desgination":{$ne:"Developer"}})
+[
+  {
+    _id: ObjectId("6559783c192511722f158ae2"),
+    Empid: 102,
+    Name: { Fname: 'Sahil', Lname: 'Vengi' },
+    company: 'ABD',
+    salary: 90000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'ML', 'AIML' ],
+    DOB: '6/6/03',
+    Email: 'sahil@gmail.com',
+    Contact: 9067722345,
+    Addr: { Paddr: { City: 'Satation', pin: 411103 }, Laddr: 'Katraj' }
+  },
+  {
+    _id: ObjectId("65597ad4192511722f158ae4"),
+    Empid: 104,
+    Name: { Fname: 'Shrikar', Lname: 'Kolte' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 20,
+    Expertise: [ 'ML', 'Cloud' ],
+    DOB: '18/08/02',
+    Email: 'Shrikar@gmail.com',
+    Contact: 9067722348,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'UK' }
+  },
+  {
+    _id: ObjectId("65597b45192511722f158ae5"),
+    Empid: 105,
+    Name: { Fname: 'Yash', Lname: 'Shivtare' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 19,
+    Expertise: [ 'anroid', 'web' ],
+    DOB: '20/07/03',
+    Email: 'Yash@gmail.com',
+    Contact: 9067722320,
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'Deccan' }
+  },
+  {
+    _id: ObjectId("65597eca192511722f158ae6"),
+    Empid: 105,
+    Name: { Fname: 'xyz', Lname: 'yz' },
+    company: 'TCS',
+    salary: 100000,
+    Desgination: 'Tester',
+    Age: 25,
+    Expertise: [ 'anroid', 'web' ],
+    DOB: '29/12/98',
+    Email: 'xyz@gmail.com',
+    Contact: 9067722323,
+    Addr: { Paddr: { City: 'Pune', pin: 411107 }, Laddr: 'vm' }
+  }
+]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q3]Find _id, Designation, Address and Name from all documents 
+ where Company_name is "Infosys".
+
+
+CRUD> db.Empdb.find(
+...   { "company": "TCS" },
+...   { "Empid": 1, "Desgination": 1, "Addr": 1, "Name": 1, "_id": 0 }
+... )
+[
+  {
+    Empid: 103,
+    Name: { Fname: 'Suraj', Lname: 'Gawade' },
+    Desgination: 'Developer',
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'KP' }
+  },
+  {
+    Empid: 104,
+    Name: { Fname: 'Shrikar', Lname: 'Kolte' },
+    Desgination: 'Tester',
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'UK' }
+  },
+  {
+    Empid: 105,
+    Name: { Fname: 'Yash', Lname: 'Shivtare' },
+    Desgination: 'Tester',
+    Addr: { Paddr: { City: 'Pune', pin: 411104 }, Laddr: 'Deccan' }
+  },
+  {
+    Empid: 105,
+    Name: { Fname: 'xyz', Lname: 'yz' },
+    Desgination: 'Tester',
+    Addr: { Paddr: { City: 'Pune', pin: 411107 }, Laddr: 'vm' }
+  }
+]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q5]Display only FName and LName of all Employees
+
+
+
+CRUD> db.Empdb.find({}, {"Name.Fname": 1, "Name.Lname": 1, "_id": 0})
+[
+  { Name: { Fname: 'Tejas', Lname: 'Dharmale' } },
+  { Name: { Fname: 'Sahil', Lname: 'Vengi' } },
+  { Name: { Fname: 'Suraj', Lname: 'Gawade' } },
+  { Name: { Fname: 'Shrikar', Lname: 'Kolte' } },
+  { Name: { Fname: 'Yash', Lname: 'Shivtare' } },
+  { Name: { Fname: 'xyz', Lname: 'yz' } }
+]
