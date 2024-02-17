@@ -1,0 +1,26 @@
+refer 10th number database in practical list
+
+employee> db.emp.find({$and:[{age:{$lt:30}},{salary:{$gt:50000}}]}).pretty();
+
+employee> db.emp.insert( {name:{FName:'shreya', LName:'borate'}, c_name:'TCS', salary:50000, desig:'Tester', age:19, expert:['mongodb','mysql','cassandra'], dob:'30-11-2003',email:'shreya3011@gmail.com', contact:'7058883011', addr:[{paddr:"pune"},{laddr:"Israel"}]} );
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("65590e6e5cc3bcf936014b64") }
+}
+
+employee> db.emp.find({$or:[{age:{$lt:30}},{salary:{$gt:40000}}]});
+
+employee> db.emp.find({desig:{$ne:"Developer"}}).pretty();
+
+
+employee> db.emp.find({c_name:'Infosys'},{_id:1,desig:1,addr:1,name:1}).pretty();
+
+employee> db.emp.find({},{name:1}).pretty();
+-------------------------------------------------------below 11 practical--------------------------------------
+employee> db.emp.find({desig:{$in:['Developer','Tester']}}).pretty();
+
+employee> db.emp.updateMany({c_name:'TCS'},{$inc:{salary:2000}});
+
+employee> db.emp.deleteOne({desig:"Developer"});
+
+employee> db.emp.countDocuments();
