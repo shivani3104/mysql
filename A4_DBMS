@@ -1,13 +1,3 @@
-Name: Sahil Vengurlekar
-Batch: R
-Roll no: 56
-PRN no: F21113058
-Assignment No: A4
-Assignment title: Fine Calculation
-
-
-
-
 Statement 1
 
 create table borrower_99 (roll_no int ,name varchar(255), date_of_issue date ,name_of_book varchar(255) ,status varchar(255))
