@@ -1,0 +1,292 @@
+
+SQL> connect;
+Enter user-name: system
+Enter password:12345
+
+cl scr == used to clear the screen
+-----------------------------------
+
+create table Employee(
+emp_Id number(5),
+emp_Name varchar2(20),
+emp_Salary float
+);
+
+
+create table student(
+roll_No number(5) primary key,
+name varchar2(20) not null,
+dob date check(dob<'1-jan-2000'),
+grade char(2) default 'A',
+perct float
+
+);
+ 
+constraints :
+--------------------------------------------------
+primary key
+not null
+defualt
+check
+
+
+HomeWork:
+-------------------------------------------------------            
+Account
+accno>100
+custname not null
+accbal
+age>18
+mobileNo
+city defualt pune
+
+
+
+create table Account
+(
+acc_No number(5) check(acc_No>100) primary key,
+cust_Name varchar2(20) not null,
+acc_Bal float,
+age number(3) check(age>18),
+mobile_No number(10),
+city varchar2(4) default ('Pune')
+);
+
+
+ insert into Account values(101,'Vidya',1000,19,7666798614,'pune'
+);
+
+==========================================================================================================================================
+(12/feb/2024)
+create table department(
+	dept_no number(5) constraint pk_dno PRIMARY KEY,
+	dept_name varchar2(20),
+	dept_loc varchar2(20));
+
+insert into department values(10,'Testing','Mumbai');
+insert into department values(20,'Hr','Pune');
+insert into department values(30,'SD','Delhi');
+
+
+create table employee(
+	empno NUMBER(6) constraint pk_eid PRIMARY KEY,
+	ename VARCHAR2(30) NOT NULL,
+	grade CHAR(3) DEFAULT 'A',
+	dob DATE CHECK (dob >= '01-jan-1980'),
+	email_id varchar2(20) unique,
+	dept_no number(5) CONSTRAINT dept_FK REFERENCES department
+);
+
+insert into employee values(01,'ayesha',default,'04-may-2003','ayesha@gmail.com',10);
+insert into employee values(02,'aliya',default,'10-sep-2000','aliya@gmail.com',20);
+insert into employee values(03,'adil',default,'07-may-2009','adil@gmail.com',30);
+
+ select * from tab;/// for showing existing table like /d in postgress sql
+cl scr //to clear the screen
+
+create table Address(
+	city VARCHAR2(20),
+	state VARCHAR2(20),
+	pincode number(7),
+	emp_no number(5) CONSTRAINT empno_FK REFERENCES employee	
+);
+
+insert into Address values('Pune','MAH',411024,01);
+
+create table demo(
+p_no number(6) CHECK(p_no<7)
+);
+
+
+============================================================================================================================================
+
+(13 feb 2024)
+
+
+create table test
+(	roll_No number(2) primary key,
+	fName varchar2(20),
+	lName varchar2(20),
+
+);
+
+ insert into test values(1,'abc','xyz');
+ alter table test add(dob Date);
+ update test set dob='1-jan-2024' where Roll_No=1;
+ desc test;
+
+ alter table test add(gr char(2));
+ update test set gr='A';
+
+--changing the column width of grade from 2 to 4
+ alter table test modify(gr char(4));
+
+
+-------change the column name-----------
+ALTER TABLE test RENAME COLUMN gr To grade;
+
+-------drop the column name--------------
+ALTER TABLE test DROP COLUMN grade;
+
+-------add new column email in test table------------
+alter table test add(email varchar2(20));
+update test set email='abc@gamil.com' where Roll_No=1;
+
+-------make email as unique by adding constraint-----------
+ALTER TABLE test ADD CONSTRAINT test_email_uk UNIQUE(email);
+
+insert into test values(2,'abc','hdcvdsui','2-feb-2002','A','abc@gmail.com');
+ERROR-unique constraint (SYSTEM.SYS_C004029) violated
+
+ALTER TABLE test DROP CONSTRAINT test_email_uk;
+
+
+ALTER TABLE test DISABLE CONSTRAINT constraint_name;
+ALTER TABLE test DISABLE CONSTRAINT test_email_uk;
+
+
+ALTER TABLE test ENABLE CONSTRAINT constraint_name;
+ALTER TABLE test ENABLE CONSTRAINT test_email_uk;
+
+
+----This is used to create a sequnce automatically with help of system for exmaple bank account number
+										   -------------------
+CREATE SEQUENCE TEST_seq
+START WITH 10
+INCREMENT BY 1
+MAXVALUE 15
+NOCACHE
+NOCYCLE;
+
+INSERT INTO test VALUES(TEST_seq.NEXTVAL,'aaa','aaa','1-jan-2002','abab@gmail.com');
+
+
+DDL commands are autocommit means we cannot undo it
+------------------------------------------------------------------------------------------------------------
+create table px
+( c1 number(2) primary key,
+   c2 varchar2(20)
+);
+
+insert into px values(1,'abc');
+
+create table py
+(
+c1 number(2) references px(c1),
+c2 char
+);
+
+ insert into py values(1,'x');
+
+
+alter table px drop column c1;
+
+ERROR-cannot drop parent key column
+
+SOLUTION--alter table px drop column c1 cascade constraints;
+					-------------------
+
+=======================================================================================================================================
+
+(20/2/2024)
+
+-----------------create table from another table----------------
+
+---CREATE TABLE Empcopy AS SELECT *FROM emp;
+
+---CREATE TABLE empcopy AS SELECT *FROM emp WHERE emp_no>1010; 
+
+----------------------------------------------------------------------------------------------------------------------------------
+1)DML(Data manipulation Language)
+================================
+
+a)Insert command
+
+------Common way to insert command-------------
+INSERT INTO Emp VALUES(101,'Sunil','Clerk');
+
+
+-----select the specific column to insert data------
+
+INSERT INTO Emp(emp_no,emp_name,job,detp_no) VALUES (102,'Rajesh','Salseman',10);
+
+
+------input from user using command line------
+
+INSERT INTO Emp VALUES(&emp_no,&emp_name,&job);
+
+
+---copy data of one table(emp) into another table(emp_copy).
+INSERT INTO empcopy(SELECT *FROM emp);
+
+
+
+b)Update command
+
+-------common update command----------
+UPDATE Employee SET ename='Kumar' WHERE emp_no=2;
+
+---------update multiple columns-----
+UPDATE Employee SET email='vidya@gmail.com',ename='Vidya' WHERE emp_no=99;
+
+
+-------------------update with help of sub-query-----------------
+UPDATE Employee SET sal=(SELECT sal FROM Employee WHERE emp_no=7788) WHERE emp_no=7665;
+
+
+
+
+c)Delete command
+
+---delete all rows--
+DELETE FROM Employee;
+
+---delete by applying conditions-----
+DELETE FROM Emp WHERE Dept_no=20;
+
+----delete by applying multiple conditions----
+DELETE FROM Employee WHERE dept_no=10 AND emp_name LIKE '%s';
+
+
+-----------------------------------------------------------------------------------------------------
+1)DML commands are not commited as soon as they are issued and explicit commit is required.
+
+2)auto commit happens under the following conditions:
+  	--->Issue od DDl commands
+	--->closing the session=exit
+
+	commit=save
+	exit=save
+
+3)Table structure is autocommited
+
+4)You have to commit for saving inserted data
+
+5)ROLLBACK function undo the changes till last commit
+
+-------------------------------------------------------------------------------------------------------
+ 2)Transaction control statement
+=====================================
+
+a)COMMIT
+--To explicitly save the changes in the database
+--Execution of DDl statements close commit the changes automatically
+SQL>COMMIT;
+
+b)SAVEPOINT<savepoint name> : It is a transaction maker
+
+SQL>SAVEPOINT A;
+
+c)ROLLBACK[ To savepoint name]:To undo the changes till last commit or till the last savepoint
+
+SQL>ROLLBACK;
+SQL>ROLLBACK TO SAVEPOINT A;
+
+
+
+
+
+
+
+
+
