@@ -1,0 +1,131 @@
+what is NoSQL?
+-Not only SQL
+-NoSQL is a category of database management systems that do not follow the traditional relational database model. 
+
+-They are designed to handle large volumes of unstructured or semi-structured data, provide high scalability, and offer flexible data models.
+-----------------------------------------------------------------------------------------------------
+what is need of NoSQL if there is sql?
+-it has high flexibility.it allow for rapid changes in data structure without needing to modify the schema.
+-it allow us to handling large volumes of unstructured data, such as social media feeds, sensor data, etc.
+-it is highly scalable.it can be scale up or down according to applications with high traffic and data volume.
+-it has high performance because of offering faster read/write operations for certain workloads.
+-------------------------------------------------------------------------------------------------
+sql vs NoSQL
+
+1 
+sql are structred database
+NoSQL is database which can be in the form of key-value, graph ,document based database
+
+2
+sql is acid based model.( atomicity, consistency, isolation, durability).
+NoSQL is base based model(basically eventually, soft state, eventally consistency).
+-----------------------------------------------------------------------------------------------
+real life example
+
+SQL: A banking system where transactions need strict consistency and relational data management.
+
+NoSQL: Social media platforms like Facebook or Twitter, where the data is vast, varied, and needs to be scaled across many servers.
+----------------------------------------------------------------------------------------------------
+
+CAP theorem
+
+consistency , availability, partition tolerance.
+
+-The CAP theorem states that it is not possible to guarantee all three of the desirable properties – consistency, availability, and partition tolerance at the same time in a distributed system with data replication. 
+
+-partition tolerance
+if one part of machine has been failed then it will not affect on other part of machine
+
+-availability
+there are so many replication of data.
+
+-consistency
+data should be same at every replicated data.
+NOTE:
+there is problem. if i update data then it should be take time to update in other replicas. 
+if someone access that other replicas it may get misinformation that why there will be only two properties will work at a time
+-------------------------------------------------------------------------------------------
+Types of NoSQL
+
+1.key-value
+2.document
+3.wide-column
+4.graph
+
+1.key-value
+example- redis, Amazon DynamoDB, oracle NoSQL
+Session management in web applications. For instance, storing user session data for a website like Twitter, where quick read/write access is crucial.
+-name:"Shivani"
+
+2.document
+example-MongoDB
+Storing user profiles and content for social media platforms. For instance, LinkedIn uses MongoDB for managing its user data and interactions.(CONTENT MANAGEMENT SYSTEM)
+-db.bios.find({"name.last":"shivani"}) --(syntax is similar to json syntax)
+
+3.wide-column
+example:Cassandra
+Real-time data analytics and big data applications.
+Netflix uses Cassandra to store and manage large amounts of user viewing data to provide personalized recommendations.Netflix uses Cassandra to handle their streaming data and user activity logs.
+-it uses table like rdms. Each row can have a different number of columns, and columns can be added to any row at any time.	
+-"Bonuse":
+{
+	row1:{"id":1 , "name":"shivani", "Bonus":8000},
+	row2:{"id":2 , "name":"shiv", "Bonus":10000}
+}
+
+
+4 graph.
+example:Neo4j, janusGraph
+Neo4j is used by LinkedIn to model and query complex relationships between users for features like "People You May Know."Representing and querying complex relationships in social networks, recommendation engines, and fraud detection.
+-it stored data in nodes that inherently show relationship via edges
+- create(p:Person)-[:LIKES]->(t:Technology)
+-------------------------------------------------------------------------------------------
+
+which type is used?
+
+1. Social Network(because there is so much relationship connections that's why)
+-Graph NoSQL
+
+2.LeaderBoard
+-Key-value
+
+3. Huge amount of data and known queries:
+Column Family
+
+4.general purpose
+-document 
+------------------------------------------------------------------------------------
+
+Vector Database
+
+-
+A vector database typically refers to a database optimized for storing and querying vector data, which includes data represented as vectors (arrays of numbers) or embeddings (numerical representations of objects or concepts).
+
+-
+Helps in semantic search, sentiment analysis, and document clustering by storing and querying word embeddings or document vectors
+
+----------------------------------------------------------------------------------------
+
+BASE theorem
+
+-Basically Available: 
+The system remains operational and responsive, even if some parts of it are failing or experiencing issues.
+
+-Eventually Consistent: 
+The system guarantees that in given enough time data will updates then all copies of data will be consistent.
+
+-Soft State:
+The system's state can change over time due to eventual consistency, meaning data might be temporarily inconsistent across nodes but will converge to a consistent state eventually.
+simply in eventual consistency , data updatation takes time. in that time period if there is no query occur still data is updating in system. that process called soft state.
+
+----------------------------------------------------------------------------------------
+
+ACID theorem
+
+Atomicity: Transactions are "all or nothing". If one part of a transaction fails, the entire transaction fails, and the database is left unchanged
+
+Consistency: Transactions take the database from one valid state to another. The database remains in a consistent state before and after any transaction.
+
+Isolation: Transactions occur independently of each other. One transaction does not affect another transaction running concurrently.
+
+Durability: Once a transaction is committed, changes are permanent and stored in non-volatile storage like disk. Even in case of system failure, the changes persist.
